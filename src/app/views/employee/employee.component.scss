@@ -1,0 +1,36 @@
+.employee {
+    &-table {
+        border: 1px solid darkgray;
+
+        tr {
+            border-bottom: 1px solid #ccc;
+            th{
+                font-weight: bold;
+            }
+            >th,
+            >td {
+                padding: 10px;
+                text-align: left;
+                &.tc{
+                    text-align: center;
+                }
+            }
+        }
+
+        tbody {
+            tr {
+                &:last-child {
+                    border: none;
+                }
+            }
+        }
+    }
+
+    .prime-color {
+        color: #2694EC;
+    }
+
+    .danger {
+        color: #C51E3A;
+    }
+}

@@ -10,6 +10,7 @@ import { InsertEmployeeInfoComponent } from './views/employee/childcomponent/ins
 import { InsertEmployeeSkillComponent } from './views/employee/childcomponent/insert-employee-skill/insert-employee-skill.component';
 import { InsertEmployeeShiftComponent } from './views/employee/childcomponent/insert-employee-shift/insert-employee-shift.component';
 import { FooterComponent } from './core/footer/footer.component';
+import { FilterComponent } from './views/employee/filter/filter.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { FooterComponent } from './core/footer/footer.component';
     InsertEmployeeInfoComponent,
     InsertEmployeeSkillComponent,
     InsertEmployeeShiftComponent,
-    FooterComponent
+    FooterComponent,
+    FilterComponent
   ],
   imports: [
     BrowserModule,
