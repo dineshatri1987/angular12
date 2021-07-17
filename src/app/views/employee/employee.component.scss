@@ -4,14 +4,17 @@
 
         tr {
             border-bottom: 1px solid #ccc;
-            th{
+
+            th {
                 font-weight: bold;
             }
+
             >th,
             >td {
                 padding: 10px;
                 text-align: left;
-                &.tc{
+
+                &.tc {
                     text-align: center;
                 }
             }
@@ -26,11 +29,9 @@
         }
     }
 
-    .prime-color {
-        color: #2694EC;
-    }
-
-    .danger {
-        color: #C51E3A;
+    .arr-d,
+    .danger-icon {
+        margin-left: 5px;
+        font-size: 20px;
     }
 }

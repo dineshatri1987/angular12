@@ -129,7 +129,13 @@ table {
     border-spacing: 0;
 }
 
-*{
+* {
     box-sizing: border-box;
     -webkit-box-sizing: border-box;
+
+    &:focus,
+    &:active {
+        outline: none;
+        border:none;
+    }
 }
