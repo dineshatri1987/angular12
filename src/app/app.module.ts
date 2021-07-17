@@ -11,6 +11,7 @@ import { InsertEmployeeSkillComponent } from './views/employee/childcomponent/in
 import { InsertEmployeeShiftComponent } from './views/employee/childcomponent/insert-employee-shift/insert-employee-shift.component';
 import { FooterComponent } from './core/footer/footer.component';
 import { FilterComponent } from './views/employee/filter/filter.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { FilterComponent } from './views/employee/filter/filter.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]
