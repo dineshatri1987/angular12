@@ -6,8 +6,8 @@ import { InsertEmployeeSkillComponent } from './childcomponent/insert-employee-s
 
 @Component({
   selector: 'app-employee',
-  templateUrl: './employee.component.html',
-  styleUrls: ['./employee.component.scss']
+  templateUrl: '/employee.component.html',
+  styleUrls: ['/employee.component.scss']
 })
 export class EmployeeComponent implements OnInit {
   @ViewChild(InsertEmployeeDetailComponent ) detail: InsertEmployeeDetailComponent | undefined ; 

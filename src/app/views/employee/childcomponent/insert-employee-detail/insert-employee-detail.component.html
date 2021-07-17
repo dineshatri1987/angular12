@@ -1,25 +1,43 @@
 <ng-template #contentDetail let-modal>
     <div class="modal-header">
-        <h4 class="modal-title" 
-            id="modal-basic-title">
+        <h4 class="modal-title prime-color" id="modal-basic-title">
+            New Employee
         </h4>
-        <button type="button" class="close"
-                aria-label="Close" (click)=
-                "modal.dismiss('Cross click')">
-  
-            <span aria-hidden="true">
-                ×
-            </span>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">×</span>
         </button>
     </div>
     <div class="modal-body">
-        <form>
+        <form action="/action_page.php">
+            <div class="form-group">
+                <label for="empName">Employee Name:</label>
+                <input type="text" class="form-control" placeholder="" id="empName">
+            </div>
+            <div class="form-group">
+                <label for="displayName">Display Name:</label>
+                <input type="text" class="form-control" placeholder="" id="displayName" required>
+            </div>
+            <div class="hr s-m"></div>
+            <div class="form-group">
+                <label for="">Port:</label>
+                <input type="text" class="form-control" placeholder="" id="">
+            </div>
+            <div class="form-group">
+                <label for="">Work Site:</label>
+                <input type="text" class="form-control" placeholder="" id="">
+            </div>
+            <div class="hr s-m"></div>
+            <div class="form-group">
+                <label for="">Description:</label>
+                <textarea class="form-control" name="" id="" cols="30" rows="5"></textarea>
+            </div>
         </form>
     </div>
     <div class="modal-footer">
-        <button type="button" 
-            class="btn btn-outline-dark" 
-            (click)="modal.close('Save click')">
+        <button type="button" class="btn btn-outline-primary" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            Cancel
+        </button>
+        <button type="button" class="btn btn-primary" (click)="modal.close('Save click')">
             Save
         </button>
     </div>

@@ -7,10 +7,12 @@
 
     &_t {
         margin-bottom: 15px;
-        &-h4{
-            font-weight: bold;
+
+        &-h4,&-p {
+            margin-bottom: 0;
         }
-        .expand{
+
+        .expand {
             font-size: 38px;
         }
     }
@@ -18,18 +20,22 @@
     &_b {
         &-i {
             margin-right: 15px;
-            &-p{
+
+            &-p {
                 margin-bottom: 8px;
             }
         }
     }
-    &-site{
+
+    &-site {
         width: 180px;
     }
-    &-status{
+
+    &-status {
         width: 150px;
     }
-    &-flex{
+
+    &-flex {
         width: 120px;
     }
 }

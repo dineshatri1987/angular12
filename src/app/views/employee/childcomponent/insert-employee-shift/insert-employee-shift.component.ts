@@ -9,21 +9,21 @@ import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 export class InsertEmployeeShiftComponent implements OnInit {
   closeResult = '';
   @ViewChild('contentShift', { static: false }) content: ElementRef | undefined;
-  constructor(private modalService: NgbModal, private ref: ElementRef) {}
+  constructor(private modalService: NgbModal, private ref: ElementRef) { }
 
   ngOnInit(): void {
   }
 
   open() {
     this.modalService.open(this.content,
-   {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      this.closeResult = 
-         `Dismissed ${this.getDismissReason(reason)}`;
-    });
+      { ariaLabelledBy: 'modal-basic-title',windowClass: 'employee-shift-modal' }).result.then((result) => {
+        this.closeResult = `Closed with: ${result}`;
+      }, (reason) => {
+        this.closeResult =
+          `Dismissed ${this.getDismissReason(reason)}`;
+      });
   }
-  
+
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
       return 'by pressing ESC';
