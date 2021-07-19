@@ -1,9 +1,7 @@
 <ng-template #contentInfo let-modal>
     <div class="modal-header">
         <h4 class="modal-title prime-color" id="modal-basic-title">New Employee</h4>
-        <button type="button" class="close"
-                aria-label="Close" (click)=
-                "modal.dismiss('Cross click')">
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
             <span aria-hidden="true">×</span>
         </button>
     </div>
@@ -11,24 +9,29 @@
         <form action="/action_page.php">
             <div class="form-group">
                 <label for="empName" class="prime-color">Employee IDCode:</label>
-                <input type="text" class="form-control" placeholder="" id="empName">
+                <input type="text" class="form-control" placeholder="" [(ngModel)]="employee.employeeCode"
+                    id="employeeCode" name="employeeCode">
             </div>
             <div class="form-group">
                 <label for="displayName">Work Locations:</label>
-                <select name="" id=""></select>
+                <select [(ngModel)]="employee.workLocation" id="workLocation" name="workLocation">
+                    <option value="Location1">Location 1</option>
+                    <option value="Location2">Location 2</option>
+                </select>
             </div>
         </form>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-back btn-outline-primary" aria-label="Close" (click)="modal.dismiss('Cross click')">
-            Back
+        <button type="button" class="btn btn-back btn-outline-primary" aria-label="Close" (click)="openDetail()">
+            BACK
         </button>
         <button type="button" class="btn btn-outline-primary" aria-label="Close" (click)="modal.dismiss('Cross click')">
-            Cancel
+            CANCEL
         </button>
         <button type="button" class="btn btn-primary" (click)="openShift()">
-            Save
+            NEXT
         </button>
     </div>
 </ng-template>
-<app-insert-employee-shift></app-insert-employee-shift>
+
+<app-insert-employee-skill></app-insert-employee-skill>

@@ -11,34 +11,49 @@
         <form action="/action_page.php">
             <div class="form-group">
                 <label for="empName">Employee Name:</label>
-                <input type="text" class="form-control" placeholder="" [(ngModel)]="employee.employeeName" id="employeeName" name="employeeName">
+                <input type="text" class="form-control" placeholder="" [(ngModel)]="employee.employeeName"
+                    id="employeeName" name="employeeName">
             </div>
             <div class="form-group">
                 <label for="displayName">Display Name:</label>
-                <input type="text" class="form-control" placeholder="" [(ngModel)]="employee.displayName" id="displayName" name="displayName" required>
+                <input type="text" class="form-control" placeholder="" [(ngModel)]="employee.displayName"
+                    id="displayName" name="displayName" required>
             </div>
             <div class="hr s-m"></div>
             <div class="form-group">
                 <label for="">Port:</label>
-                <input type="text" class="form-control" placeholder="" [(ngModel)]="employee.port" id="port" name="port">
+                <input type="text" class="form-control" placeholder="" [(ngModel)]="employee.port" id="port"
+                    name="port">
             </div>
             <div class="form-group">
                 <label for="">Work Site:</label>
-                <input type="text" class="form-control" placeholder="" [(ngModel)]="employee.workSite" id="workSite" name="workSite">
+                <input type="text" class="form-control" placeholder="" [(ngModel)]="employee.workSite" id="workSite"
+                    name="workSite">
+            </div>
+            <div class="form-group">
+                <label for="">Active from:</label>
+                <input type="date" class="form-control" placeholder="" [(ngModel)]="employee.activeFromDate"
+                    id="activeFromDate" name="activeFromDate">
+            </div>
+            <div class="form-group">
+                <label for="">Active through(Opt):</label>
+                <input type="date" class="form-control" placeholder="" [(ngModel)]="employee.activeThroghtDate"
+                    id="activeThroghtDate" name="activeThroghtDate">
             </div>
             <div class="hr s-m"></div>
             <div class="form-group">
                 <label for="">Description:</label>
-                <textarea class="form-control" id="description" name="description" [(ngModel)]="employee.description" cols="30" rows="5"></textarea>
+                <textarea class="form-control" id="description" name="description" [(ngModel)]="employee.description"
+                    cols="30" rows="5"></textarea>
             </div>
         </form>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-outline-primary" aria-label="Close" (click)="modal.dismiss('Cross click')">
-            Cancel
+            CANCEL
         </button>
         <button type="button" class="btn btn-primary" (click)="openInfo()">
-            Save
+            NEXT
         </button>
     </div>
 </ng-template>

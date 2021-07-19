@@ -24,89 +24,17 @@
                                 warning
                             </span>
                         </div>
-
                     </th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
+                <tr *ngFor="let item of employees;">
                     <td class="prime-color">AAPD</td>
-                    <td>DIA</td>
+                    <td>{{item.workSite}}</td>
                     <td class="tc">22/24</td>
                     <td class="tc">12/2023</td>
                     <td class="tc">No</td>
                 </tr>
-                <tr>
-                    <td class="prime-color">AAPD</td>
-                    <td>DIA</td>
-                    <td class="tc">22/24</td>
-                    <td class="tc">12/2023</td>
-                    <td class="tc">No</td>
-                </tr>
-                <tr>
-                    <td class="prime-color">AAPD</td>
-                    <td>DIA</td>
-                    <td class="tc">22/24</td>
-                    <td class="tc">12/2023</td>
-                    <td class="tc">No</td>
-                </tr>
-                <tr>
-                    <td class="prime-color">AAPD</td>
-                    <td>DIA</td>
-                    <td class="tc">22/24</td>
-                    <td class="tc">12/2023</td>
-                    <td class="tc">No</td>
-                </tr>
-                <tr>
-                    <td class="prime-color">AAPD</td>
-                    <td>DIA</td>
-                    <td class="tc">22/24</td>
-                    <td class="tc">12/2023</td>
-                    <td class="danger">
-                        <div class="fc">
-                            Yes
-                            <span class="material-icons danger-icon">
-                                warning
-                            </span>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="prime-color">AAPD</td>
-                    <td>DIA</td>
-                    <td class="tc">22/24</td>
-                    <td class="tc">12/2023</td>
-                    <td class="danger">
-                        <div class="fc">
-                            Yes
-                            <span class="material-icons danger-icon">
-                                warning
-                            </span>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="prime-color">AAPD</td>
-                    <td>DIA</td>
-                    <td class="tc">22/24</td>
-                    <td class="danger">
-                        <div class="fc">
-                            12/18
-                            <span class="material-icons danger-icon">
-                                warning
-                            </span>
-                        </div>
-                    </td>
-                    <td class="tc">No</td>
-                </tr>
-                <tr>
-                    <td class="prime-color">AAPD</td>
-                    <td>DIA</td>
-                    <td class="tc">22/24</td>
-                    <td class="tc">12/2023</td>
-                    <td class="tc">No</td>
-                </tr>
-
             </tbody>
         </table>
     </div>

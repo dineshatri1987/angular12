@@ -1,16 +1,22 @@
-import { createAction, props } from '@ngrx/store';
+import { createAction } from '@ngrx/store';
+import { Employee } from '../models/employee';
 
 export const addEmployee = createAction(
   '[Employee List] Add Employee',
-  props<{ employeeId: any }>()
+  (employee: Employee) => ({ employee })
+);
+
+export const updateEmployee = createAction(
+  '[Employee List] update Employee',
+  (employee: Employee) => ({ employee })
 );
 
 export const removeEmployee = createAction(
   '[Employee Collection] Remove Employee',
-  props<{ employeeId: any }>()
+  (employee: Employee) => ({ employee })
 );
 
-export const retrievedEmployeeList = createAction(
-  '[Employee List/API] Retrieve Employee Success',
-  props<{ Employee: any }>()
+export const setEmployeeId = createAction(
+  'Set Employee Id',
+  (employeeId: string) => ({ employeeId })
 );

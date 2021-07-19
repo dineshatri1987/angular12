@@ -13,8 +13,7 @@ import { FooterComponent } from './core/footer/footer.component';
 import { FilterComponent } from './views/employee/filter/filter.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { StoreModule } from '@ngrx/store';
-import { collectionReducer } from './state/collection.reducer';
-import { employeesReducer } from './state/employee.reducer';
+import { employeeFeatureKey, employeeIdReducers, employeeReducer, reducers } from './state/employee.reducer';
 
 @NgModule({
   declarations: [
@@ -33,9 +32,11 @@ import { employeesReducer } from './state/employee.reducer';
     AppRoutingModule,
     FormsModule,
     NgbModule,
-    StoreModule.forRoot({ employees: employeesReducer, collection: collectionReducer }),
+    StoreModule.forRoot({ employees: reducers, employeeId: employeeIdReducers }),
+    StoreModule.forFeature(employeeFeatureKey, employeeReducer)
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
