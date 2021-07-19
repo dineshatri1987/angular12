@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './core/header/header.component';
@@ -12,6 +12,9 @@ import { InsertEmployeeShiftComponent } from './views/employee/childcomponent/in
 import { FooterComponent } from './core/footer/footer.component';
 import { FilterComponent } from './views/employee/filter/filter.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { StoreModule } from '@ngrx/store';
+import { collectionReducer } from './state/collection.reducer';
+import { employeesReducer } from './state/employee.reducer';
 
 @NgModule({
   declarations: [
@@ -28,7 +31,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgbModule
+    FormsModule,
+    NgbModule,
+    StoreModule.forRoot({ employees: employeesReducer, collection: collectionReducer }),
   ],
   providers: [],
   bootstrap: [AppComponent]

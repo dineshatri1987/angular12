@@ -1,5 +1,8 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Store } from '@ngrx/store';
+import { Employee } from 'src/app/models/employee';
+import { InsertEmployeeShiftComponent } from '../insert-employee-shift/insert-employee-shift.component';
 
 @Component({
   selector: 'app-insert-employee-info',
@@ -8,10 +11,28 @@ import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class InsertEmployeeInfoComponent implements OnInit {
   closeResult = '';
+  employee: Employee = {
+    workSite: "",
+    description: "",
+    displayName:"",
+    employeeCode: "",
+    employeeName:"",
+    id:"",
+    port:"",
+    workLocation:""
+  };
   @ViewChild('contentInfo', { static: false }) content: ElementRef | undefined;
-  constructor(private modalService: NgbModal, private ref: ElementRef) {}
+  @ViewChild(InsertEmployeeShiftComponent ) shift: InsertEmployeeShiftComponent | undefined ; 
+
+  constructor(private modalService: NgbModal, private ref: ElementRef) {
+  }
 
   ngOnInit(): void {
+  }
+
+  openShift() {
+    this.modalService.dismissAll();
+    this.shift?.open();
   }
 
   open() {

@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { InsertEmployeeSkillComponent } from '../insert-employee-skill/insert-employee-skill.component';
 
 @Component({
   selector: 'app-insert-employee-shift',
@@ -9,9 +10,15 @@ import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 export class InsertEmployeeShiftComponent implements OnInit {
   closeResult = '';
   @ViewChild('contentShift', { static: false }) content: ElementRef | undefined;
+  @ViewChild(InsertEmployeeSkillComponent ) skill: InsertEmployeeSkillComponent | undefined ; 
   constructor(private modalService: NgbModal, private ref: ElementRef) { }
 
   ngOnInit(): void {
+  }
+
+  openSkill() {
+    this.modalService.dismissAll();
+    this.skill?.open();
   }
 
   open() {

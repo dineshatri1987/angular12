@@ -1,6 +1,9 @@
-import { Component, ElementRef, OnInit, ViewChild, ViewChildren } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import {NgbModal, ModalDismissReasons} 
       from '@ng-bootstrap/ng-bootstrap';
+import { InsertEmployeeInfoComponent } from '../insert-employee-info/insert-employee-info.component';
+import { Employee } from 'src/app/models/employee';
+import { Store, select } from '@ngrx/store';
 @Component({
   selector: 'app-insert-employee-detail',
   templateUrl: './insert-employee-detail.component.html',
@@ -8,10 +11,21 @@ import {NgbModal, ModalDismissReasons}
 })
 export class InsertEmployeeDetailComponent implements OnInit {
   closeResult = '';
+  employee: Employee = {} as Employee;
   @ViewChild('contentDetail', { static: false }) content: ElementRef | undefined;
-  constructor(private modalService: NgbModal, private ref: ElementRef) {}
+  @ViewChild(InsertEmployeeInfoComponent ) info: InsertEmployeeInfoComponent | undefined ; 
+
+  constructor(private modalService: NgbModal, private ref: ElementRef, private store: Store) {
+  }
+  
 
   ngOnInit(): void {
+  }
+
+  openInfo() {
+    debugger
+    this.modalService.dismissAll();
+    this.info?.open();
   }
 
   open() {
