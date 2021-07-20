@@ -9,8 +9,8 @@
                     <th>
                         <div class="flex ac">
                             <span> Work Unit </span>
-                            <span class="material-icons arr-d">
-                                arrow_downward
+                            <span class="material-icons arr-d" (click)="sortData()">
+                                {{isAscendingSort ? 'arrow_downward': 'arrow_upward'}}
                             </span>
                         </div>
                     </th>
