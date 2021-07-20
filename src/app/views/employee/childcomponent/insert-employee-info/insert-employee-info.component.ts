@@ -1,4 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AbstractControl, FormBuilder, Validators } from '@angular/forms';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
@@ -15,11 +16,13 @@ import { InsertEmployeeSkillComponent } from '../insert-employee-skill/insert-em
 })
 export class InsertEmployeeInfoComponent implements OnInit {
   closeResult = '';
+  formInfo = this.fb.group({});
+  submitted = false;
   employee: Employee = {} as Employee;
   @ViewChild('contentInfo', { static: false }) content: ElementRef | undefined;
   @ViewChild(InsertEmployeeSkillComponent ) skill: InsertEmployeeSkillComponent | undefined ; 
   subs: Subscription;
-  constructor(private modalService: NgbModal, private ref: ElementRef, private store: Store<AppState>, private sharedService:SharedService) {
+  constructor(private modalService: NgbModal, private ref: ElementRef, private store: Store<AppState>, private sharedService:SharedService, private fb: FormBuilder) {
     this.subs = sharedService.OpenInfo$.subscribe((emp)=>{ 
       this.open(emp); 
     });
@@ -33,22 +36,42 @@ export class InsertEmployeeInfoComponent implements OnInit {
     this.subs.unsubscribe();
   }
 
+  get f(): { [key: string]: AbstractControl } {
+    return this.formInfo.controls;
+  }
+
+  initializeInfoForm() {
+    this.formInfo = this.fb.group({
+      employeeCode: [this.employee.employeeCode, [Validators.required]],
+      workLocation: [this.employee.workLocation, [Validators.required]]
+    });
+  }
+
   openSkill() {
+    this.submitted = true;
+    if (this.formInfo.invalid) {
+      return;
+    }
+    this.employee = { ...this.employee, ...this.formInfo.value };
     this.modalService.dismissAll();
     this.skill?.open(this.employee);
   }
 
   openDetail(){
+    this.employee = { ...this.employee, ...this.formInfo.value };
     this.modalService.dismissAll();
     this.sharedService.OpenDetail$.emit(this.employee)
   }
 
   open(employee1: Employee) {
     this.employee = Object.assign({},employee1);
+    this.initializeInfoForm();
     this.modalService.open(this.content,
    {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+    this.submitted = false;
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
+      this.submitted = false;
       this.closeResult = 
          `Dismissed ${this.getDismissReason(reason)}`;
     });

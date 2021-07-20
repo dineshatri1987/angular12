@@ -1,4 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AbstractControl, FormBuilder } from '@angular/forms';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
@@ -15,16 +16,22 @@ import { InsertEmployeeSkillComponent } from '../insert-employee-skill/insert-em
 })
 export class InsertEmployeeShiftComponent implements OnInit {
   closeResult = '';
+  formShift = this.fb.group({});
+  submitted = false;
   employee: Employee = {} as Employee;
   @ViewChild('contentShift', { static: false }) content: ElementRef | undefined;
   subs: Subscription;
-  constructor(private modalService: NgbModal, private ref: ElementRef, private store: Store<AppState>, private sharedService:SharedService) {
+  constructor(private modalService: NgbModal, private ref: ElementRef, private store: Store<AppState>, private sharedService:SharedService, private fb: FormBuilder) {
     this.subs = sharedService.OpenShift$.subscribe((emp)=>{ 
       this.open(emp); 
     });
   }
 
   ngOnInit(): void {
+  }
+
+  get f(): { [key: string]: AbstractControl } {
+    return this.formShift.controls;
   }
 
   daysChange(i: number, j: number) {

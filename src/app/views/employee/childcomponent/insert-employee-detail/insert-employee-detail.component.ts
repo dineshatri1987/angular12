@@ -7,6 +7,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/state/app.state';
 import { SharedService } from 'src/app/services/SharedService';
 import { Subscription } from 'rxjs';
+import { AbstractControl, FormBuilder, Validators } from '@angular/forms';
 @Component({
   selector: 'app-insert-employee-detail',
   templateUrl: './insert-employee-detail.component.html',
@@ -14,11 +15,13 @@ import { Subscription } from 'rxjs';
 })
 export class InsertEmployeeDetailComponent implements OnInit {
   closeResult = '';
+  formDetail = this.fb.group({});
+  submitted = false;
   employee: Employee = new Employee();
   @ViewChild('contentDetail', { static: false }) content: ElementRef | undefined;
   @ViewChild(InsertEmployeeInfoComponent ) info: InsertEmployeeInfoComponent | undefined ; 
   subs: Subscription;
-  constructor(private modalService: NgbModal, private ref: ElementRef, private store: Store<AppState>, private sharedService:SharedService) {
+  constructor(private modalService: NgbModal, private ref: ElementRef, private store: Store<AppState>, private sharedService:SharedService, private fb: FormBuilder) {
     this.subs = sharedService.OpenDetail$.subscribe((emp)=>{ 
       this.open(emp); 
     });
@@ -29,11 +32,32 @@ export class InsertEmployeeDetailComponent implements OnInit {
 
   }
 
+  get f(): { [key: string]: AbstractControl } {
+    return this.formDetail.controls;
+  }
+
+  initializeInfoForm() {
+    this.formDetail = this.fb.group({
+      employeeName: [this.employee.employeeName, [Validators.required]],
+      displayName: [this.employee.displayName, [Validators.required]],
+      port: [this.employee.port, [Validators.required]],
+      workSite: [this.employee.workSite, [Validators.required]],
+      description: [this.employee.description, [Validators.required]],
+      activeFromDate: [this.employee.activeFromDate, [Validators.required]],
+      activeThroghtDate: [this.employee.activeThroghtDate, []]
+    });
+  }
+
   ngOndestroy(){
     this.subs.unsubscribe();
   }
 
   openInfo() {
+    this.submitted = true;
+    if (this.formDetail.invalid) {
+      return;
+    }
+    this.employee = { ...this.employee, ...this.formDetail.value };
     this.employee.id = this.newGuid();
     this.modalService.dismissAll();
     this.info?.open(this.employee);
@@ -44,10 +68,13 @@ export class InsertEmployeeDetailComponent implements OnInit {
     if(employee1){
       this.employee = Object.assign({},employee1);
     }
+    this.initializeInfoForm();
     this.modalService.open(this.content,
    {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+    this.submitted = false;
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
+    this.submitted = false;
       this.closeResult = 
          `Dismissed ${this.getDismissReason(reason)}`;
     });

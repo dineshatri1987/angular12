@@ -10,25 +10,30 @@
         </button>
     </div>
     <div class="modal-body">
-        <form action="/action_page.php">
+        <form [formGroup]="formSkill">
             <div class="form-group">
                 <label for="empName" class="prime-color">Employee Skills:</label>
                 <div class="badge-wrap flex ac w100 jsb">
                     <span class="badge badge-info"
-                        *ngFor="let skill of employee.skills;let indexOfelement=index;">{{skill}}</span>
+                        *ngFor="let skill of employee.skills;let indexOfelement=index;" [ngClass]="{ 'is-invalid': submitted && f.skills.errors }">{{skill}}</span>
                 </div>
+            <div *ngIf="submitted && f.skills.errors" class="invalid-feedback">
+                <div *ngIf="f.skills.errors.required">Skills is required</div>
+            </div>
             </div>
             <div class="form-group">
                 <label for="displayName">Enter Skills:</label>
                 <div class="flex ac jsb">
-                    <input class="e-skill-in" type="text" [(ngModel)]="newSkill" id="newSkill" name="newSkill" />
+                    <input class="e-skill-in" type="text" formControlName="newSkill" name="newSkill" />
                     <span class="material-icons" (click)="addSkill()">add</span>
                 </div>
             </div>
             <div class="form-group">
                 <label for="displayName">Additional Skills:</label>
-                <textarea class="form-control" cols="30" rows="6" [(ngModel)]="employee.additionalSkill"
-                    id="additionalSkill" name="additionalSkill"></textarea>
+                <textarea class="form-control" cols="30" rows="6" formControlName="additionalSkill" [ngClass]="{ 'is-invalid': submitted && f.additionalSkill.errors }"></textarea>
+                <div *ngIf="submitted && f.additionalSkill.errors" class="invalid-feedback">
+                    <div *ngIf="f.additionalSkill.errors.required">Additional Skill is required</div>
+                </div>
             </div>
         </form>
     </div>
@@ -40,7 +45,7 @@
         <button type="button" class="btn btn-outline-primary" aria-label="Close" (click)="modal.dismiss('Cross click')">
             CANCEL
         </button>
-        <button type="button" class="btn btn-primary" (click)="openShift()">
+        <button type="submit" class="btn btn-primary" (click)="openShift()">
             NEXT
         </button>
     </div>
