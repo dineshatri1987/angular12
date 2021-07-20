@@ -14,6 +14,7 @@ import { FilterComponent } from './views/employee/filter/filter.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { StoreModule } from '@ngrx/store';
 import { employeeFeatureKey, employeeIdReducers, employeeReducer, reducers } from './state/employee.reducer';
+import { SharedService } from './services/SharedService';
 
 @NgModule({
   declarations: [
@@ -35,8 +36,8 @@ import { employeeFeatureKey, employeeIdReducers, employeeReducer, reducers } fro
     StoreModule.forRoot({ employees: reducers, employeeId: employeeIdReducers }),
     StoreModule.forFeature(employeeFeatureKey, employeeReducer)
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [SharedService],
+  bootstrap: [AppComponent ]
 })
 export class AppModule { }
 

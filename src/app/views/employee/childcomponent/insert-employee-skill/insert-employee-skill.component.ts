@@ -1,7 +1,9 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Store } from '@ngrx/store';
+import { Subscription } from 'rxjs';
 import { Employee } from 'src/app/models/employee';
+import { SharedService } from 'src/app/services/SharedService';
 import { AppState } from 'src/app/state/app.state';
 import { addEmployee } from 'src/app/state/employee.actions';
 import { InsertEmployeeShiftComponent } from '../insert-employee-shift/insert-employee-shift.component';
@@ -17,7 +19,12 @@ export class InsertEmployeeSkillComponent implements OnInit {
   newSkill: string = '';
   @ViewChild('contentSkill', { static: false }) content: ElementRef | undefined;
   @ViewChild(InsertEmployeeShiftComponent ) shift: InsertEmployeeShiftComponent | undefined ; 
-  constructor(private modalService: NgbModal, private ref: ElementRef, private store: Store<AppState>) {}
+  subs: Subscription;
+  constructor(private modalService: NgbModal, private ref: ElementRef, private store: Store<AppState>,  private sharedService:SharedService) {
+    this.subs = sharedService.OpenSkill$.subscribe((emp)=>{ 
+      this.open(emp); 
+    });
+  }
 
   ngOnInit(): void {
   }
@@ -27,20 +34,22 @@ export class InsertEmployeeSkillComponent implements OnInit {
     this.shift?.open(this.employee);
   }
 
+  openInfo(){
+    this.modalService.dismissAll();
+    this.sharedService.OpenInfo$.emit(this.employee)
+  }
+
   addSkill(){
     this.employee.skills.push(this.newSkill);
     this.newSkill = '';
   }
 
   open(employee1: Employee) {
-    debugger
     this.employee = Object.assign({},employee1);
     this.modalService.open(this.content,
    {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
-    this.store.dispatch(addEmployee(this.employee));
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
-      this.store.dispatch(addEmployee(this.employee));
       this.closeResult = 
          `Dismissed ${this.getDismissReason(reason)}`;
     });

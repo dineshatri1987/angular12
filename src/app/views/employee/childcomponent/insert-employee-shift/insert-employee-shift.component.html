@@ -14,7 +14,7 @@
         <div *ngFor="let item of employee.shift;let indexOfelement=index;">
             <div class="flex shift-wrap shift-head">
                 <input class="supervisor-in f1" type="text" [(ngModel)]="item.designation" id="designation"
-                    name="designation">
+                    name="designation" disabled="disabled">
                 <div class="pos f1 tc">
                     <label *ngIf="indexOfelement==0" for=""># Positions</label>
                     <input type="text" [(ngModel)]="item.positions" id="positions" name="positions">
@@ -92,7 +92,7 @@
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-back btn-outline-primary" aria-label="Close"
-            (click)="modal.dismiss('Cross click')">
+            (click)="openSkill()">
             BACK
         </button>
         <button type="button" class="btn btn-outline-primary" aria-label="Close" (click)="modal.dismiss('Cross click')">

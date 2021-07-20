@@ -15,7 +15,7 @@ export class Employee {
   }
 
 export class EmployeeShift {
-    designation: string = 'Supervisor';
+    designation: string = '';
     positions: number = 0;
     shiftInTime: string = '';
     shiftOutTimne: string = '';

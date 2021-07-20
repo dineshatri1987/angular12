@@ -8,11 +8,11 @@
         </button>
     </div>
     <div class="modal-body">
-        <form action="/action_page.php">
+        <form id="detailForm" action="/action_page.php">
             <div class="form-group">
-                <label for="empName">Employee Name:</label>
+                <label for="employeeName">Employee Name:</label>
                 <input type="text" class="form-control" placeholder="" [(ngModel)]="employee.employeeName"
-                    id="employeeName" name="employeeName">
+                    id="employeeName" name="employeeName" required>
             </div>
             <div class="form-group">
                 <label for="displayName">Display Name:</label>
@@ -21,28 +21,28 @@
             </div>
             <div class="hr s-m"></div>
             <div class="form-group">
-                <label for="">Port:</label>
+                <label for="port">Port:</label>
                 <input type="text" class="form-control" placeholder="" [(ngModel)]="employee.port" id="port"
                     name="port">
             </div>
             <div class="form-group">
-                <label for="">Work Site:</label>
+                <label for="workSite">Work Site:</label>
                 <input type="text" class="form-control" placeholder="" [(ngModel)]="employee.workSite" id="workSite"
                     name="workSite">
             </div>
             <div class="form-group">
-                <label for="">Active from:</label>
+                <label for="activeFromDate">Active from:</label>
                 <input type="date" class="form-control" placeholder="" [(ngModel)]="employee.activeFromDate"
                     id="activeFromDate" name="activeFromDate">
             </div>
             <div class="form-group">
-                <label for="">Active through(Opt):</label>
+                <label for="activeThroghtDate">Active through(Opt):</label>
                 <input type="date" class="form-control" placeholder="" [(ngModel)]="employee.activeThroghtDate"
                     id="activeThroghtDate" name="activeThroghtDate">
             </div>
             <div class="hr s-m"></div>
             <div class="form-group">
-                <label for="">Description:</label>
+                <label for="description">Description:</label>
                 <textarea class="form-control" id="description" name="description" [(ngModel)]="employee.description"
                     cols="30" rows="5"></textarea>
             </div>
@@ -52,7 +52,7 @@
         <button type="button" class="btn btn-outline-primary" aria-label="Close" (click)="modal.dismiss('Cross click')">
             CANCEL
         </button>
-        <button type="button" class="btn btn-primary" (click)="openInfo()">
+        <button form="detailForm" type="submit" class="btn btn-primary" (click)="openInfo()">
             NEXT
         </button>
     </div>

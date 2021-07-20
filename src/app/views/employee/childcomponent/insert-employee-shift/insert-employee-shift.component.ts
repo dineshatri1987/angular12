@@ -1,7 +1,9 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Store } from '@ngrx/store';
+import { Subscription } from 'rxjs';
 import { Employee, EmployeeShift } from 'src/app/models/employee';
+import { SharedService } from 'src/app/services/SharedService';
 import { AppState } from 'src/app/state/app.state';
 import { addEmployee } from 'src/app/state/employee.actions';
 import { InsertEmployeeSkillComponent } from '../insert-employee-skill/insert-employee-skill.component';
@@ -15,7 +17,12 @@ export class InsertEmployeeShiftComponent implements OnInit {
   closeResult = '';
   employee: Employee = {} as Employee;
   @ViewChild('contentShift', { static: false }) content: ElementRef | undefined;
-  constructor(private modalService: NgbModal, private ref: ElementRef, private store: Store<AppState>) { }
+  subs: Subscription;
+  constructor(private modalService: NgbModal, private ref: ElementRef, private store: Store<AppState>, private sharedService:SharedService) {
+    this.subs = sharedService.OpenShift$.subscribe((emp)=>{ 
+      this.open(emp); 
+    });
+  }
 
   ngOnInit(): void {
   }
@@ -24,8 +31,15 @@ export class InsertEmployeeShiftComponent implements OnInit {
     this.employee.shift[i].days[j] = !this.employee.shift[i].days[j];
   }
 
+  openSkill(){
+    this.modalService.dismissAll();
+    this.sharedService.OpenSkill$.emit(this.employee)
+  }
+
   addShift(){
-    this.employee.shift.push(new EmployeeShift());
+    const shift = new EmployeeShift();
+    shift.designation = "shift" + this.employee.shift.length;
+    this.employee.shift.push(shift);
   }
 
   DeleteShift(index: number){
@@ -39,8 +53,11 @@ export class InsertEmployeeShiftComponent implements OnInit {
 
   open(employee1: Employee) {
     this.employee = Object.assign({},employee1);
-    this.employee.shift = []; 
-    this.employee.shift.push(new EmployeeShift());
+    if(this.employee.shift.length == 0){
+      const shift = new EmployeeShift();
+      shift.designation = "Supervisor";
+      this.employee.shift.push(shift);
+    }
     this.modalService.open(this.content,
       { ariaLabelledBy: 'modal-basic-title',windowClass: 'employee-shift-modal' }).result.then((result) => {
         this.closeResult = `Closed with: ${result}`;

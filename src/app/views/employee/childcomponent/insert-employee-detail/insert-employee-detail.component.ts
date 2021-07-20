@@ -5,7 +5,8 @@ import { InsertEmployeeInfoComponent } from '../insert-employee-info/insert-empl
 import { Employee } from 'src/app/models/employee';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/state/app.state';
-import { addEmployee } from 'src/app/state/employee.actions';
+import { SharedService } from 'src/app/services/SharedService';
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-insert-employee-detail',
   templateUrl: './insert-employee-detail.component.html',
@@ -16,8 +17,11 @@ export class InsertEmployeeDetailComponent implements OnInit {
   employee: Employee = new Employee();
   @ViewChild('contentDetail', { static: false }) content: ElementRef | undefined;
   @ViewChild(InsertEmployeeInfoComponent ) info: InsertEmployeeInfoComponent | undefined ; 
-
-  constructor(private modalService: NgbModal, private ref: ElementRef, private store: Store<AppState>) {
+  subs: Subscription;
+  constructor(private modalService: NgbModal, private ref: ElementRef, private store: Store<AppState>, private sharedService:SharedService) {
+    this.subs = sharedService.OpenDetail$.subscribe((emp)=>{ 
+      this.open(emp); 
+    });
   }
   
 
@@ -25,8 +29,11 @@ export class InsertEmployeeDetailComponent implements OnInit {
 
   }
 
+  ngOndestroy(){
+    this.subs.unsubscribe();
+  }
+
   openInfo() {
-    debugger
     this.employee.id = this.newGuid();
     this.modalService.dismissAll();
     this.info?.open(this.employee);

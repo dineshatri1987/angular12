@@ -15,8 +15,13 @@
             <div class="form-group">
                 <label for="displayName">Work Locations:</label>
                 <select [(ngModel)]="employee.workLocation" id="workLocation" name="workLocation">
-                    <option value="Location1">Location 1</option>
-                    <option value="Location2">Location 2</option>
+                    <option value="AAPD">AAPD</option>
+                    <option value="Anti-Terror/Contraband Enforcement">Anti-Terror/Contraband Enforcement</option>
+                    <option value="Agriculture">Agriculture</option>
+                    <option value="Passenger CORE Processing">Passenger CORE Processing</option>
+                    <option value="FPF">FPF</option>
+                    <option value="Passenger Admissibility Unit">Passenger Admissibility Unit</option>
+                    <option value="Passenger Enforcement Rover Team">Passenger Enforcement Rover Team</option>
                 </select>
             </div>
         </form>
@@ -28,7 +33,7 @@
         <button type="button" class="btn btn-outline-primary" aria-label="Close" (click)="modal.dismiss('Cross click')">
             CANCEL
         </button>
-        <button type="button" class="btn btn-primary" (click)="openShift()">
+        <button type="button" class="btn btn-primary" (click)="openSkill()">
             NEXT
         </button>
     </div>

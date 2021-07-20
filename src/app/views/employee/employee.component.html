@@ -29,10 +29,10 @@
             </thead>
             <tbody>
                 <tr *ngFor="let item of employees;">
-                    <td class="prime-color">AAPD</td>
+                    <td class="prime-color">{{item.workLocation}}</td>
                     <td>{{item.workSite}}</td>
                     <td class="tc">22/24</td>
-                    <td class="tc">12/2023</td>
+                    <td class="tc">{{item.activeThroghtDate}}</td>
                     <td class="tc">No</td>
                 </tr>
             </tbody>

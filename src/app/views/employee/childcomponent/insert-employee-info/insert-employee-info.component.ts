@@ -1,7 +1,9 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Store } from '@ngrx/store';
+import { Subscription } from 'rxjs';
 import { Employee } from 'src/app/models/employee';
+import { SharedService } from 'src/app/services/SharedService';
 import { AppState } from 'src/app/state/app.state';
 import { InsertEmployeeDetailComponent } from '../insert-employee-detail/insert-employee-detail.component';
 import { InsertEmployeeSkillComponent } from '../insert-employee-skill/insert-employee-skill.component';
@@ -16,22 +18,29 @@ export class InsertEmployeeInfoComponent implements OnInit {
   employee: Employee = {} as Employee;
   @ViewChild('contentInfo', { static: false }) content: ElementRef | undefined;
   @ViewChild(InsertEmployeeSkillComponent ) skill: InsertEmployeeSkillComponent | undefined ; 
-
-  constructor(private modalService: NgbModal, private ref: ElementRef, private store: Store<AppState>) {
+  subs: Subscription;
+  constructor(private modalService: NgbModal, private ref: ElementRef, private store: Store<AppState>, private sharedService:SharedService) {
+    this.subs = sharedService.OpenInfo$.subscribe((emp)=>{ 
+      this.open(emp); 
+    });
   }
 
   ngOnInit(): void {
     
   }
 
-  openShift() {
+  ngOndestroy(){
+    this.subs.unsubscribe();
+  }
+
+  openSkill() {
     this.modalService.dismissAll();
     this.skill?.open(this.employee);
   }
 
   openDetail(){
     this.modalService.dismissAll();
-    //this.detail?.open(this.employee);
+    this.sharedService.OpenDetail$.emit(this.employee)
   }
 
   open(employee1: Employee) {
